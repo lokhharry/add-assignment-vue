@@ -6,6 +6,7 @@ import Dashboard from './views/Dashboard.vue'
 
 import CMS_Property from './components/CMS_Property'
 import CMS_Customer from './components/CMS_Customer'
+import CMS_Branch from './components/CMS_Branch'
 import CMS_Transaction from './components/CMS_Transaction'
 
 Vue.use(Router)
@@ -14,33 +15,38 @@ export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [{
+    path: '/',
+    name: 'index',
+    component: Index
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: Login
+  },
+  {
+    path: '/cms',
+    component: Dashboard,
+    children: [{
       path: '/',
-      name: 'index',
-      component: Index
+      name: 'CMS_Property',
+      component: CMS_Property,
     },
     {
-      path: '/login',
-      name: 'login',
-      component: Login
+      path: 'customer',
+      name: 'CMS_Customer',
+      component: CMS_Customer,
     },
     {
-      path: '/cms',
-      component: Dashboard,
-      children: [{
-        path: '/',
-        name: 'CMS_Property',
-        component: CMS_Property,
-      },
-      {
-        path: 'customer',
-        name: 'CMS_Customer',
-        component: CMS_Customer,
-      },
-      {
-        path: 'report',
-        name: 'CMS_Transaction',
-        component: CMS_Transaction,
-      }]
+      path: 'branch',
+      name: 'CMS_Branch',
+      component: CMS_Branch,
     },
+    {
+      path: 'report/:ID',
+      name: 'CMS_Transaction',
+      component: CMS_Transaction,
+    }]
+  },
   ]
 })

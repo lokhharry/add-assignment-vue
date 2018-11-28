@@ -28,6 +28,7 @@
 </template>
 
 <style lang="scss" scoped>
+
 </style>
 
 <script>
@@ -36,12 +37,12 @@ import axios from "axios";
 export default {
   data() {
     return {
-      username: null,
-      password: null
+      username: 'Devin Martinez',
+      password: '21027631'
     };
   },
   methods: {
-    login: function() {
+    login: function () {
       let self = this;
       axios({
         url: `/account/login`,
@@ -52,8 +53,13 @@ export default {
           Password: this.password,
           Type: "Agent"
         }
-      }).then(function(response) {
-        self.transaction = response.data;
+      }).then(function (response) {
+        switch (response.status) {
+          case 200:
+            self.$store.commit('setUser', response.data)
+            self.$router.push('/cms')
+            break
+        }
       });
     }
   }

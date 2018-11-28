@@ -51,18 +51,18 @@ export default {
     };
   },
   methods: {
-    getTransaction: function() {
+    getTransaction: function () {
       let self = this;
       axios({
-        url: `/data/get-transaction-by-branch/${4}`,
+        url: `/data/get-transaction-by-branch/${this.$route.params.ID}`,
         method: "get",
         responseType: "json"
-      }).then(function(response) {
+      }).then(function (response) {
         self.transaction = response.data;
       });
     }
   },
-  mounted: function() {
+  mounted: function () {
     this.getTransaction();
   }
 };

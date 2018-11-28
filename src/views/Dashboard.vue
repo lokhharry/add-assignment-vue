@@ -51,7 +51,7 @@
         <span class="hidden-sm-and-down">HK Property CMS</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn icon @click="">
+      <v-btn icon @click="logout">
         <v-icon>input</v-icon>
       </v-btn>
     </v-toolbar>
@@ -69,8 +69,14 @@ export default {
     items: [
       { icon: "contacts", text: "Property", url: '/cms' },
       { icon: "content_copy", text: "Customer", url: '/cms/customer' },
-      { icon: "history", text: "Transaction Report", url: '/cms/report' },
+      { icon: "history", text: "Branch", url: '/cms/branch' },
     ]
   }),
+  methods: {
+    logout: function () {
+      this.$store.commit('logout')
+      this.$router.push('/login')
+    }
+  }
 };
 </script>

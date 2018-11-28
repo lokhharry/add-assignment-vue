@@ -3,12 +3,14 @@
     <v-layout row wrap align-content-start>
       <v-flex xs12>
         <v-card>
-          <v-flex xs4>
-            <v-select :items="districts" label="District" item-text="Name" item-value="ID" v-model="selectedDistrict" v-on:change="getEstate()"></v-select>
-          </v-flex>
-          <v-flex xs4>
-            <v-select :items="estates" label="Estate" item-text="Name" item-value="ID" v-model="selectedEstate" v-on:change="getProperty()"></v-select>
-          </v-flex>
+          <v-layout justify-space-between>
+            <v-flex xs4>
+              <v-select :items="districts" label="District" item-text="Name" item-value="ID" v-model="selectedDistrict" v-on:change="getEstate()"></v-select>
+            </v-flex>
+            <v-flex xs4>
+              <v-select :items="estates" label="Estate" item-text="Name" item-value="ID" v-model="selectedEstate" v-on:change="getProperty()"></v-select>
+            </v-flex>
+          </v-layout>
           <v-flex xs12>
             <v-data-table :headers="propertyTableHeader" :items="propertys" class="">
               <template slot="items" slot-scope="props">
@@ -63,38 +65,38 @@ export default {
     };
   },
   methods: {
-    getDistrict: function() {
+    getDistrict: function () {
       let self = this;
       axios({
         url: "/data/get-district",
         method: "get",
         responseType: "json"
-      }).then(function(response) {
+      }).then(function (response) {
         self.districts = response.data;
       });
     },
-    getEstate: function() {
+    getEstate: function () {
       let self = this;
       axios({
         url: `/data/get-estate/${this.selectedDistrict}`,
         method: "get",
         responseType: "json"
-      }).then(function(response) {
+      }).then(function (response) {
         self.estates = response.data;
       });
     },
-    getProperty: function() {
+    getProperty: function () {
       let self = this;
       axios({
         url: `/data/get-property-by-estate/${this.selectedEstate}`,
         method: "get",
         responseType: "json"
-      }).then(function(response) {
+      }).then(function (response) {
         self.propertys = response.data;
       });
     }
   },
-  mounted: function() {
+  mounted: function () {
     this.getDistrict();
   }
 };
