@@ -11,7 +11,7 @@ import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
 import '../public/base.css'
 
-axios.defaults.baseURL = 'http://psrilakkuma.ddns.net:8001'
+axios.defaults.baseURL = 'http://localhost:8001'
 
 Vue.config.productionTip = false
 
